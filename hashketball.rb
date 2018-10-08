@@ -1,17 +1,10 @@
-require "pry"
+# require "pry"
 # Write your code here!
-def points_for(player_name)
-  game_hash[:home_team][:players].each do |player|
-    if player[:name] == player_name
-      return player[:points]
-    end
-  end
-end
 
 def game_hash
   {
-  :home_team => {
-    :name => "Brooklyn Nets",
+  :home => {
+    :team_name => "Brooklyn Nets",
     :colors => ["Black", "White"],
     :players => [
       {
@@ -71,8 +64,8 @@ def game_hash
       }
     ]
   },
-  :away_team => {
-    :name => "Charlotte Hornets",
+  :away => {
+    :team_name => "Charlotte Hornets",
     :colors => ["Turquoise", "Purple"],
     :players => [
       {
@@ -169,7 +162,7 @@ end
 def team_colors (team_name)
     colors = nil
     game_hash.each do |team, team_details_hash|
-        if team_details_hash[:name] == team_name
+        if team_details_hash[:team_name] == team_name
             colors = team_details_hash[:colors].flatten
         end
     end
@@ -179,7 +172,7 @@ end
 
 def team_names
   game_hash.collect do |team, team_details_hash|
-    team_details_hash[:name]
+    team_details_hash[:team_name]
   end
 end
 
@@ -187,7 +180,7 @@ end
 def player_numbers (team_name)
   player_numbers_list = []
   game_hash.each do |team, team_details_hash|
-    if team_details_hash[:name] == team_name
+    if team_details_hash[:team_name] == team_name
       team_details_hash[:players].each do |player|
         player.each do |key, value|
           if key == :number
